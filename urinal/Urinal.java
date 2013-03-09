@@ -4,12 +4,12 @@ public class Urinal {
     private int position;
     private boolean taken;
 
-    protected Urinal(int pos) {
+    public Urinal(int pos) {
         position = pos;
         taken = false;
     }
 
-    protected int getPosition() {
+    public int getPosition() {
         return position;
     }
 
@@ -17,7 +17,7 @@ public class Urinal {
         taken = true;
     }
 
-    protected boolean isTaken() {
+    public boolean isTaken() {
         return taken;
     }
 

@@ -8,6 +8,10 @@ public class UrinalRow {
         urinals = new ArrayList<Urinal>();
     }
 
+    public ArrayList<Urinal> getUrinalList() {
+        return urinals;
+    }
+
     public int numOfUrinals() {
         return urinals.size();
     }

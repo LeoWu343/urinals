@@ -27,8 +27,8 @@ public class Urinal {
 
     public String toString() {
         if(taken) {
-            return "Urinal " + position + "that is taken.";
+            return "Urinal " + position + " that is taken.";
         }
-        return "Urinal " + position + "that is not taken.";
+        return "Urinal " + position + " that is not taken.";
     }
 }

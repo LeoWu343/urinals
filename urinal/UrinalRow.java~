@@ -112,6 +112,7 @@ public class UrinalRow {
 
     public static void main(String[] args) {
         UrinalRow herro = new UrinalRow();
+        System.out.print("Please enter the number of urinals: ");
         Scanner userIn = new Scanner(System.in);
         int urinalNum = userIn.nextInt();
         for(int i = 0; i < urinalNum; i++) {

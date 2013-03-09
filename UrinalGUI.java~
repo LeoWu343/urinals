@@ -1,3 +1,72 @@
-public class UrinalGUI {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import urinal.*;
 
+public class UrinalGUI extends JFrame {
+
+    private static final int WIDTH = 1350;
+    private static final int HEIGHT = 400;
+    protected UrinalRow urinals;
+    private JButton next;
+    private JOptionPane prompt;
+
+    public UrinalGUI() {
+        JOptionPane prompt = new JOptionPane();
+        String num = prompt.showInputDialog("Please enter the number of urinals:");
+        urinals = new UrinalRow();
+        for(int i = 0; i < Integer.parseInt(num); i++) {
+            urinals.makeUrinal();
+        }
+        next = new JButton("Next");
+        next.setBounds(1000, 250, 200, 100);
+        next.addActionListener(new NextListener());
+        setTitle("Urinal Simulator 2013");
+        setContentPane(new DrawPane());
+        Container pane = getContentPane();
+        pane.setLayout(null);
+        pane.add(next);
+        setSize(WIDTH, HEIGHT);
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    public ArrayList<Urinal> getUrinalList() {
+        return urinals.getUrinalList();
+    }
+
+    class DrawPane extends JPanel {
+        Image emptyUrinal = new ImageIcon("C:/Users/Leo Wu/Pictures/Sprites/Urinal Sprites/EmptyUrinal.png").getImage();
+        Image fullUrinal = new ImageIcon("C:/Users/Leo Wu/Pictures/Sprites/Urinal Sprites/UsedUrinal.png").getImage();
+
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.setBackground(Color.WHITE);
+            g.setColor(Color.BLACK);
+            for(Urinal i : urinals.getUrinalList()) {
+                if(i.isTaken()) {
+                    g.drawImage(fullUrinal, i.getPosition() * 100, 100, 100, 100, Color.WHITE, null);
+                }
+                else {
+                    g.drawImage(emptyUrinal, i.getPosition() * 100, 100, 100, 100, Color.WHITE, null);
+                }
+            }
+            repaint();
+        }
+    }
+
+    private class NextListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            try {
+                urinals.takeUrinal();
+            } catch(InvalidUrinalException a) {
+                System.err.println(a);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        UrinalGUI urinalObj = new UrinalGUI();
+    }
 }
